@@ -29,17 +29,18 @@ function init(config) {
 
     }
   }
-  if(config.company){
-    try{
-      axios.post('http://yapi.demo.qunar.com/publicapi/statis', {company: config.company}).then(res=>{});
-    }catch(e){}
-  }
+  // if(config.company){
+  //   try{
+  //     axios.post('http://yapi.demo.qunar.com/publicapi/statis', {company: config.company}).then(res=>{});
+  //   }catch(e){}
+  // }
   if(fileExist(path.resolve(root, 'init.lock'))){
     throw new Error('系统已安装，如需重新安装，请清空数据库和删除init.lock文件');
   }
   if(config.enableDbAuth && config.dbUser){
     data.db.user = config.dbUser;
     data.db.pass = config.dbPass;
+    data.db.authSource = config.dbAuthSource;
   }
   fs.ensureDirSync(root);
   fs.writeFileSync(path.resolve(root, 'config.json'), JSON.stringify(data, null, '   '));

@@ -18,7 +18,7 @@ function connect(config) {
       options.pass = config.db.pass;
   }
   
-  return mongoose.connect(`mongodb://${config.db.servername}:${config.db.port}/${config.db.DATABASE}`, options);
+  return mongoose.connect(`mongodb://${config.db.servername}:${config.db.port}/${config.db.DATABASE}?authSource=${config.db.authSource}`, options);
 }
 
 function ensureFilepaths(root) {
